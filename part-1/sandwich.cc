@@ -1,4 +1,3 @@
-
 // Dave Javle
 // dvjavele@csu.fullerton.edu
 // @DaveJavle
@@ -11,8 +10,7 @@ int main(int argc, char* argv[]) {
   std::vector<std::string> arguments{argv, argv + argc};
 
   if (argc != 4) {
-    std::cerr << "Usage: " << arguments[0]
-              << " <PROTEIN> <BREAD> <CONDIMENT>\n";
+    std::cerr << " error: you must supply three arguments.\n";
     return 1;
   }
   std::string protein = arguments[1];
