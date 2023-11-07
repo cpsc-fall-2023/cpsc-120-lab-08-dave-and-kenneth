@@ -9,20 +9,27 @@
 
 int main(int argc, char* argv[]) {
   std::vector<std::string> arguments{argv, argv + argc};
-  if (arguments.size() < 2) {
-    std::cout << "error: you must supply at least one number\n";
+
+  if (argc <= 1) {
+    std::cerr << "Error: No command line arguments provided." << std::endl;
     return 1;
   }
 
-  double sum = 0.0;
-  size_t arg_size = arguments.size();
-  for (size_t i = 1; i < arg_size; ++i) {
-    sum += std::stod(arguments[i]);
+  double sum = 0;
+  size_t num_args = arguments.size();
+  for (size_t i = 1; i < num_args; ++i) {
+    try {
+      sum += std::stod(arguments[i]);
+    } catch (const std::invalid_argument& e) {
+      std::cerr << "Error: Invalid argument '" << arguments[i] << "'."
+                << std::endl;
+      return 1;
+    }
   }
 
-  double average = sum / static_cast<double>(arguments.size() - 1);
+  double average = sum / static_cast<double>(num_args - 1);
 
-  std::cout << "average = " << average << std::endl;
+  std::cout << "Average = " << average << std::endl;
 
   return 0;
 }
